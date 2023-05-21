@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleLogin.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="ContainerNavBar">
+        <div class="logo" id="logo">
+            <img src="../img/logo.png" alt="">
+        </div>
+        <div class="atalho" id="inicio">
+            Início
+        </div>
+        <div class="atalho" id="farms">
+            Farms
+        </div>
+        <div class="atalho" id="classes">
+            Classes
+        </div>
+        <div class="atalho" id="comunidade">
+            Comunidade
+        </div>
+        <div class="cadastro" id="cadastro">
+            Cadastro
+        </div>
+    </div>
+
+    <div class="conteudo">
+        <div class="containerlogin">
+            <h3>Login</h3>
+            <input placeholder="nome usuario" id="ipt_username">
+            <input placeholder="senha" type="password" id="ipt_senha">
+            <button onclick="entrar()">
+                Cadastrar
+            </button>
+            <div>
+                <span>
+                    <a href="./cadastro.html">
+                        Cadastre-se
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- Aqui vai começar a parte do cadastro realmente -->
+    
+</body>
+</html>
+
+<script>
+    function entrar(){
+        var usernameVar = ipt_username.value
+        var senhaVar = ipt_senha.value
+        
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                usernameServer: usernameVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "./index.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+</script>

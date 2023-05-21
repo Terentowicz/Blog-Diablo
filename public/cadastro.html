@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleCadastro.css">
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <div class="ContainerNavBar">
+        <div class="logo" id="logo">
+            <img src="../img/logo.png" alt="">
+        </div>
+        <div class="atalho" id="inicio">
+            Início
+        </div>
+        <div class="atalho" id="farms">
+            Farms
+        </div>
+        <div class="atalho" id="classes">
+            Classes
+        </div>
+        <div class="atalho" id="comunidade">
+            Comunidade
+        </div>
+        <div class="login" id="login">
+            Login
+        </div>
+    </div>
+
+    <div class="conteudo">
+        <div class="cadastro">
+            <h3>Cadastro</h3>
+            <input placeholder="Nome" id="ipt_nome">
+            <input placeholder="Sobrenome" id="ipt_sobrenome">
+            <input placeholder="Username" id="ipt_username">
+            <input placeholder="email" id="ipt_email">
+            <input placeholder="********" type="password" id="ipt_senha">
+            <input placeholder="Confirmação Senha" type="password" id="ipt_confirmacao_senha">
+            <button onclick="cadastrar()">
+                Cadastrar
+            </button>
+            <div>
+                <span>
+                    <a href="../login/login.html">
+                        Logar
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- Aqui vai começar a parte do cadastro realmente -->
+
+</body>
+
+</html>
+
+<script>
+    // listaCaracteresEspeciais = [
+    //     '!','@','#','$','%','¨','"',"'",
+    // ]
+    function cadastrar() {
+
+        var nomeVar = ipt_nome.value.toLowerCase()
+        var sobrenomeVar = ipt_sobrenome.value.toLowerCase()
+        var usernameVar = ipt_username.value.toLowerCase()
+        var emailVar = ipt_email.value.toLowerCase()
+        var senhaVar = ipt_senha.value
+        var senhaConfirVar = ipt_confirmacao_senha.value
+
+
+
+        if (nomeVar == "" || sobrenomeVar == "" || usernameVar == "" || emailVar == "" || senhaVar == "" || senhaConfirVar == "") {
+            alert("Por favor, preencha todos os campos")
+        } else if (emailVar.indexOf('@') == -1) {
+            alert("Insira um email válido!")
+        } else if (senhaVar != senhaConfirVar) {
+            alert("Senhas diferentes!")
+        }else {
+            alert("Conta criada com sucesso!")
+        }
+
+        
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+               
+                nomeServer: nomeVar,
+                sobrenomeServer:sobrenomeVar,
+                usernameServer:usernameVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        })
+        
+
+
+    }
+
+</script>
