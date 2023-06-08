@@ -37,7 +37,7 @@
             <input placeholder="nome usuario" id="ipt_username">
             <input placeholder="senha" type="password" id="ipt_senha">
             <button onclick="entrar()">
-                Cadastrar
+                Entrar
             </button>
             <div>
                 <span>
@@ -81,29 +81,15 @@
                     sessionStorage.ID_USUARIO = json.id;
 
                     setTimeout(function () {
-                        window.location = "./index.html";
+                        window.location = "./comunidade.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
 
-            } else {
+            } 
+       
+    })
+}
 
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
-    }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
+    
 </script>

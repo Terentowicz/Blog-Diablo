@@ -81,23 +81,24 @@
             alert("Senhas diferentes!")
         }else {
             alert("Conta criada com sucesso!")
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                   
+                    nomeServer: nomeVar,
+                    sobrenomeServer:sobrenomeVar,
+                    usernameServer:usernameVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            })
+            window.location = "./login.html"
         }
 
         
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-               
-                nomeServer: nomeVar,
-                sobrenomeServer:sobrenomeVar,
-                usernameServer:usernameVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        })
         
 
 
