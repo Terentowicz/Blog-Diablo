@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/stylePerfilUsuario.css">
+    <title>Document</title>
+</head>
+
+<body onload="carregarInfos()">
+    <div class="ContainerNavBar">
+        <div class="logo" id="logo">
+            <img src="./img/logo.png" alt="">
+        </div>
+        <div class="icone" id="inicio">
+            Início
+        </div>
+        <div class="icone" id="farms">
+            Farms
+        </div>
+        <div class="icone" id="classes">
+            Classes
+        </div>
+        <div class="icone" id="comuniadade">
+            Comunidade
+        </div>
+        <div class="sair" id="iconSair">
+            <a href="./login.html">Sair </a>
+        </div>
+    </div>
+
+    <div class="containerUsuario">
+        <div class="janelaFoto">
+
+            <div class="fotoPerfil"></div>
+            <div class="modal">
+                <div class="content">
+                    <button onclick="salvarFoto()">Salvar</button>
+                </div>
+            </div>
+            <button onclick="verFotos()" class="btnFoto">+</button>
+        </div>
+        <div class="infoPerfil">
+            <div class="nomeUsuario">Nome</div>
+            <div class="sobrenome">Sobrenome</div>
+            <div class="email">Email</div>
+            <div class="nickName">Nome de Usuario</div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+
+    function carregarInfos() {
+        fetch("/usuarios/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    alert("Deu ruim menó")
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+        const switchModal = () => {
+            const modal = document.querySelector('.modal')
+            const actualStyle = modal.style.display
+            if (actualStyle == 'block') {
+                modal.style.display = 'none'
+            }
+            else {
+                modal.style.display = 'block'
+            }
+        }
+
+        const btn = document.querySelector('.btnFoto')
+        btn.addEventListener('click', switchModal)
+
+        window.onclick = function (event) {
+            const modal = document.querySelector('.modal')
+            if (event.target == modal) {
+                switchModal()
+            }
+        }
+
+        // var janelaUsuario = document.createElement("div");
+        // var fotoPerfil = document.createElement("div");
+        // var modalFotos = document.createElement("div");
+        // var nomeUsuario = document.createElement("div");
+        // var sobrenome = document.createElement("div");
+        // var nomeUsuario = document.createElement("div");
+        // var nickName = document.createElement("div");
+        // var email = document.createElement("div");
+
+
+
+
+
+    }
+
+
+    function verFotos() {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

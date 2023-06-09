@@ -9,7 +9,7 @@ function listar() {
             c.descricao,
             c.fkUsuario,
             u.id AS idUsuario,
-            u.nome,
+            u.nomeUsuario,
             u.email,
             u.senha
         FROM comentario AS c
@@ -30,7 +30,7 @@ function pesquisarDescricao(texto) {
             c.descricao,
             c.fkUsuario,
             u.id AS idUsuario,
-            u.nome,
+            u.nomeUsuario,
             u.email,
             u.senha
         FROM comentario AS c
@@ -51,7 +51,7 @@ function listarPorUsuario(idUsuario) {
             c.descricao,
             c.fkUsuario,
             u.id AS idUsuario,
-            u.nome,
+            u.nomeUsuario,
             u.email,
             u.senha
         FROM aviso a

@@ -48,3 +48,34 @@
 .editar {
     background-color: black;
 }
+.div-reuslts {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.feed-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    ;
+}
+.containerComentarios {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.publicacao-descricao {
+    margin-top: 5vh;
+    border-radius: 15px;
+    border-color: gray;
+    width: 80vh; /* Define a largura da caixa */
+    height: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    word-break:break-all;
+  
+}

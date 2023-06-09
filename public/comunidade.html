@@ -21,7 +21,7 @@
             Farms
         </div>
         <div class="icone" id="classes">
-            Classes
+            <a href="./perfilUsuario.html">Classes</a>
         </div>
         <div class="icone" id="comuniadade">
             Comunidade
@@ -34,9 +34,9 @@
     <div class="containerComent">
 
     
-            <div class="container">
-                <h1>Publicar um aviso</h1>
-                <div class="div-form">
+            <div class="containerComentarios">
+                <h1>Feed de Comentários</h1>
+                <!-- <div class="div-form">
                     <form id="form_postagem" method="post" onsubmit="return publicar()">
                         <label>
                             Título:
@@ -52,8 +52,8 @@
                         <br>
                         <button>Enviar</button>
                     </form>
-                </div>
-                <h1>Mural de Avisos</h1>
+                </div> -->
+                
                 <div class="div-results">
                     <div id="feed_container" class="feed-container">
                     </div>
@@ -70,6 +70,7 @@
 
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
+       
 
         var corpo = {
             titulo: form_postagem.titulo.value,
@@ -105,6 +106,8 @@
 
     }
     function atualizarFeed() {
+       
+
         fetch("/avisos/listar").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
@@ -134,7 +137,7 @@
 
                         spanID.innerHTML = "ID: <b>" + publicacao.idComentario + "</b>";
                         spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
+                        spanNome.innerHTML = "Autor: <b>" + publicacao.nomeUsuario + "</b>";
                         divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
 
                         divPublicacao.className = "publicacao";
@@ -173,14 +176,13 @@
                         }
                     }
 
-                    finalizarAguardar();
                 });
             } else {
                 throw ('Houve um erro na API!');
             }
         }).catch(function (resposta) {
             console.error(resposta);
-            finalizarAguardar();
+            finalizarAguardar
         });
     }
 </script>
