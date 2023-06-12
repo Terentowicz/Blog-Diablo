@@ -34,34 +34,34 @@
 
     <h1>Votação</h1>
 
-    <div id="poll">
+    <div id="enquete">
         <h2>Qual o seu ato favorito?</h2>
         <ul id="options">
             <li>
-                <input type="radio" name="ato" id="option1" value="ato 1">
+                <input type="radio" name="ato" name="1" value="1">
                 <label for="option1">Ato 1</label>
             </li>
             <li>
-                <input type="radio" name="ato" id="option2" value="ato 2">
+                <input type="radio" name="ato" name="2" value="2">
                 <label for="option2">Ato 2</label>
             </li>
             <li>
-                <input type="radio" name="ato" id="option3" value="ato 3">
+                <input type="radio" name="ato" name="3" value="3">
                 <label for="option3">Ato 3</label>
             </li>
             <li>
-                <input type="radio" name="ato" id="option4" value="ato 4">
+                <input type="radio" name="ato" name="4" value="4">
                 <label for="option4">Ato 4</label>
             </li>
             <li>
-                <input type="radio" name="ato" id="option5" value="ato 5">
+                <input type="radio" name="ato" name="5" value="5">
                 <label for="option5">Ato 5</label>
             </li>
         </ul>
         <button onclick="voto()">Votar</button>
         <div id="resultado"></div>
     </div>
-<!-- 
+    <!-- 
     <div class="containerGrafico">
         <div>
             <canvas id="myChart"></canvas>
@@ -72,23 +72,39 @@
 </html>
 
 <script>
+    var idVoto = null
+
     function voto() {
-    const options = document.getElementsByName("ato");
-    let selectedOption = null;
+        const options = document.getElementsByName("ato");
+        
 
-    for (let i = 0; i < options.length; i++) {
-        if (options[i].checked) {
-            selectedOption = options[i].value;
-            break;
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].checked) {
+                var opcSelecionada = null;
+                opcSelecionada = options[i].value;
+               
+                console.log()
+                
+                break;
+            }
         }
-    }
 
-    if (selectedOption) {
-        document.getElementById("resultado").textContent = `Você votou em: ${selectedOption}`;
-    } else {
-        document.getElementById("resultado").textContent = "Selecione uma opção antes de votar.";
-    }
+        if (opcSelecionada) {
+            document.getElementById("resultado").textContent = `Você votou em: Ato ${opcSelecionada}`;
+            fetch("/usuarios/votarEnquete", {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                   
+                 opcSelecionadaServer: opcSelecionada  
+                })
+            })
+        } else {
+            document.getElementById("resultado").textContent = "Selecione uma opção antes de votar.";
+        }
 
-    
-}
+
+    }
 </script>

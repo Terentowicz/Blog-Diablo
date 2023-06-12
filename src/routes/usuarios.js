@@ -25,8 +25,11 @@ router.get("/fotos", function (req, res) {
 })
 
 router.patch("/adicionarFotos", function (req, res) {
-    console.log("To na rota usuarios/addFoto")
     usuarioController.attFoto(req, res);
+})
+
+router.patch("/votarEnquete", function (req, res){
+    console.log("Tô na rota: votar enquete");
 })
 
 module.exports = router;

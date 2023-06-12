@@ -138,6 +138,17 @@ function attFoto(req, res) {
         );
 }
 
+function addVoto (req, res) {
+    console.log();
+    var atoVotado = req.body.opcSelecionadaServer
+
+    console.log("Esse aqui é o valor do ato selcionado:" + atoVotado);
+
+    if (addVoto == null || addVoto == undefined){
+        res.status(404).send("Meu parceiro, seu voto ta sem valor :(")
+    }
+}
+
 
 module.exports = {
     entrar,
@@ -145,5 +156,6 @@ module.exports = {
     listar,
     testar,
     listarFotos,
-    attFoto
+    attFoto,
+    addVoto
 }
