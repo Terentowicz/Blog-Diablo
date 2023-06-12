@@ -33,7 +33,7 @@ function entrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-        
+
         usuarioModel.entrar(usuario, senha)
             .then(
                 function (resultado) {
@@ -76,7 +76,7 @@ function cadastrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
     } else {
-        
+
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         usuarioModel.cadastrar(nome, sobrenome, usuario, email, senha)
             .then(
@@ -95,10 +95,55 @@ function cadastrar(req, res) {
             );
     }
 }
+function listarFotos(req, res) {
+    usuarioModel.listarFotos()
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
+function attFoto(req, res) {
+    var idUsuario = req.body.idUsuarioServer;
+    var idImg = req.body.idImge;
+
+    console.log("Este é o valor da variavei id Usuario" + idUsuario);
+    console.log("Este é o valor da variavei id Imagem" + idImg);
+
+    if(idUsuario == null || idUsuario == undefined){
+        res.status(400).send("Ta undefined meu rei")
+    }else if(idImg == null || idImg == undefined){
+        res.status(400).send("Seu id img ta undefined")
+    }
+
+    usuarioModel.attFoto(idImg, idUsuario)
+        .then(function (resultado) {
+            res.status(204).send("Update realizado com sucesso.");
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a atualização da imagem de perfil do usuário! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    listarFotos,
+    attFoto
 }

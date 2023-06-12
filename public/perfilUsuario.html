@@ -27,26 +27,27 @@
             Comunidade
         </div>
         <div class="sair" id="iconSair">
-            <a href="./login.html">Sair </a>
+            <a href="./login.html">Sair</a>
         </div>
     </div>
 
     <div class="containerUsuario">
         <div class="janelaFoto">
 
-            <div class="fotoPerfil"></div>
+            <div class="fotoPerfil">
+                <img id="imgPerfil" src="" alt="">
+            </div>
             <div class="modal">
-                <div class="content">
-                    <button onclick="salvarFoto()">Salvar</button>
+                <div class="content" id="modalImg">
                 </div>
             </div>
             <button onclick="verFotos()" class="btnFoto">+</button>
         </div>
         <div class="infoPerfil">
-            <div class="nomeUsuario">Nome</div>
-            <div class="sobrenome">Sobrenome</div>
-            <div class="email">Email</div>
-            <div class="nickName">Nome de Usuario</div>
+            <div class="nomeUsuario" id="nomeNome"></div>
+            <div class="sobrenome" id="sobrenome"></div>
+            <div class="email" id="email"></div>
+            <div class="nickName" id="nickName"></div>
         </div>
     </div>
 </body>
@@ -54,14 +55,14 @@
 </html>
 
 <script>
-
+    var fotoSelecionadaId = null;
 
     function carregarInfos() {
         fetch("/usuarios/listar").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
-                    alert("Deu ruim menó")
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    alert("Deu ruim menó");
+                    mensagem.innerHTML = "Nenhum resultado encontrado.";
                     feed.appendChild(mensagem);
                     throw "Nenhum resultado encontrado!!";
                 }
@@ -69,64 +70,109 @@
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
+                    for (let i = 0; i < resposta.length; i++) {
+                        if (sessionStorage.ID_USUARIO == resposta[i].id) {
+                            nomeNome.innerHTML = `Nome: ${resposta[i].nome}`;
+                            sobrenome.innerHTML = `Sobrenome: ${resposta[i].sobrenome}`;
+                            email.innerHTML = `Email: ${resposta[i].email}`;
+                            nickName.innerHTML = `Nome Usuário: ${resposta[i].nomeUsuario}`;
+
+                            let pathImgPerfilPadrao = "./img/fundoNecro.webp";
+                            document.getElementById("imgPerfil").src = resposta[i].url == null ? `${pathImgPerfilPadrao}` : `${resposta[i].url}`;
+                            // operador ternário ^^^^ -- condicao é verdadeira ? valor caso sim : valor caso não
+                        }
+                    }
                 });
             } else {
-                throw ('Houve um erro na API!');
+                throw "Houve um erro na API!";
             }
         }).catch(function (resposta) {
             console.error(resposta);
         });
-
-        const switchModal = () => {
-            const modal = document.querySelector('.modal')
-            const actualStyle = modal.style.display
-            if (actualStyle == 'block') {
-                modal.style.display = 'none'
-            }
-            else {
-                modal.style.display = 'block'
-            }
-        }
-
-        const btn = document.querySelector('.btnFoto')
-        btn.addEventListener('click', switchModal)
-
-        window.onclick = function (event) {
-            const modal = document.querySelector('.modal')
-            if (event.target == modal) {
-                switchModal()
-            }
-        }
-
-        // var janelaUsuario = document.createElement("div");
-        // var fotoPerfil = document.createElement("div");
-        // var modalFotos = document.createElement("div");
-        // var nomeUsuario = document.createElement("div");
-        // var sobrenome = document.createElement("div");
-        // var nomeUsuario = document.createElement("div");
-        // var nickName = document.createElement("div");
-        // var email = document.createElement("div");
-
-
-
-
-
     }
-
 
     function verFotos() {
+        const switchModal = () => {
+            const modal = document.querySelector('.modal');
+            const actualStyle = modal.style.display;
+            const idModalIMG = document.getElementById('modalImg');
+            idModalIMG.innerHTML = '';
+            if (actualStyle == 'block') {
+                modal.style.display = 'none';
+            } else {
+                var btn = document.createElement('button');
+                modal.style.display = 'block';
+                btn.className = 'botaoModal';
+                btn.innerHTML = 'Salvar Foto';
+                listarFotos();
+                idModalIMG.appendChild(btn);
+                btn.onclick = attFoto
+            }
+        };
 
+        const btn = document.querySelector('.btnFoto');
+        btn.addEventListener('click', switchModal());
+
+        window.onclick = function (event) {
+            const modal = document.querySelector('.modal');
+            if (event.target == modal) {
+                switchModal();
+            }
+        };
     }
 
+    function listarFotos() {
+        fetch("/usuarios/fotos").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    alert("Deu ruim menó, banco vazio!");
+                    throw "Nenhum resultado encontrado!";
+                }
+            }
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+                const modalImg = document.getElementById("modalImg");
+                resposta.forEach(objAtual => {
+                    const tagImg = document.createElement("img");
+                    tagImg.src = objAtual.url;
+                    tagImg.dataset.id = objAtual.id;
+                    tagImg.className = "fotosModal";
+                    modalImg.appendChild(tagImg);
+                });
+                const fotosModal = document.querySelectorAll('.fotosModal');
+                console.log("Estou no selecionador do modal");
+                fotosModal.forEach((foto) => {
+                    foto.addEventListener('click', () => {
+                        if (fotoSelecionadaId) {
+                            const fotoSelecionadaAnterior = document.querySelector(`[data-id="${fotoSelecionadaId}"]`);
+                            fotoSelecionadaAnterior.classList.remove('selecionada'); // remove a classe da imagem previamente selecionada
+                        }
+                        fotoSelecionadaId = foto.dataset.id; // atualiza o ID da foto selecionada
+                        foto.classList.add('selecionada'); // adiciona uma classe para destacar a imagem selecionada
+                    });
+                });
+            });
+        });
+    }
 
+    function attFoto() {
 
+        fetch("/usuarios/adicionarFotos", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
 
+                idUsuarioServer: sessionStorage.ID_USUARIO,
+                idImge: fotoSelecionadaId
 
+            })
+        }).then(function (resposta) {
+            if (resposta.status == 400) {
+                console.log("Há um erro no body ou nos headers da sua requisição. Verifique e tente novamente.");
+            }
+        })
 
-
-
-
-
-
-
+    }
 </script>

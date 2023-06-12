@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0; 
+ }
+ body {
+     background-image: url(../img/fundoEnquete.jpg);
+ }
+ @font-face {
+     font-family: diabloTitulo;
+     src: url(../fontes/diablo-heavy.ttf);
+ }
+ @font-face {
+     font-family: diabloTexto;
+     src: url(../fontes/diablo-light.ttf);
+ }
+ .ContainerNavBar {
+     font-family: diabloTitulo;
+     display: flex;
+     flex-direction: row;
+     width: 100%;
+     height: 10vh;
+     background-color: #242526;
+     
+ }
+ #logo img{
+     height: 10vh;
+ }
+ .icone {
+     color:rgb(255, 255, 255);
+     font-size: 3vh;
+     margin-top: 3vh;
+     margin-left: 1vh;
+     padding-left: 5vh;
+     cursor: pointer;
+ } 
+ .sair {
+     color:white;
+     font-size: 3vh;
+     margin-top:3vh;
+     margin-left: 100vh;
+     cursor: pointer;
+ 
+ }
+ .sair a{
+    text-decoration: none;
+    color: white;
+ }
+
+ h1 {
+    font-family: diabloTexto;
+    text-align: center;
+}
+
+#poll {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    font-family: diabloTexto;
+}
+
+#options li {
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: diabloTexto;
+}
+
+#result {
+    margin-top: 20px;
+    font-weight: bold;
+    font-family: diabloTexto;
+ 
+}

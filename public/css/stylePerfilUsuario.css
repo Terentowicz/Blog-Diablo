@@ -72,8 +72,8 @@
     width: 5vh;
     height: 5vh;
     border-radius: 100%;
-    margin-top: 18vh;
-    margin-right: 2vh;
+    /* margin-top: 18vh; */
+    margin-left: 32.5vh;
     cursor: pointer; 
  }
  .title {
@@ -126,10 +126,23 @@
     color: var(--title);
 }
 .infoPerfil {
-    /* / display: flex;
-    flex-direction: column; */
+    font-family: diabloTexto;
     margin-top: 40vh;
-    margin-right: 30vh; 
-    height: 15vh;
-    width: 10vh;
+    height: auto;
+    width: auto;
+    margin-left: -40vh;
+    font-size: 3.5vh;
+}
+.fotosModal {
+    border-radius: 100%;
+    width: auto;
+    height: auto;
+}
+.selecionada {
+   background-color: #242526;
+   opacity: 0.3;
+}
+
+.imgPerfil {
+    background: none;
 }

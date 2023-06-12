@@ -33,10 +33,19 @@
 
     <div class="containerComent">
 
-    
-            <div class="containerComentarios">
-                <h1>Feed de Comentários</h1>
-                <!-- <div class="div-form">
+
+        <div class="containerComentarios">
+            <h1>Feed de Comentários</h1>
+
+            <div class="div-results">
+                <div id="feed_container" class="feed-container">
+                </div>
+            </div>
+        </div>
+
+        <div class="modal">
+            <div class="content">
+                <div class="div-form">
                     <form id="form_postagem" method="post" onsubmit="return publicar()">
                         <label>
                             Título:
@@ -50,15 +59,12 @@
                             <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
                         </label>
                         <br>
-                        <button>Enviar</button>
+                        <button type="submit">Enviar</button>
                     </form>
-                </div> -->
-                
-                <div class="div-results">
-                    <div id="feed_container" class="feed-container">
-                    </div>
                 </div>
             </div>
+        </div>
+        <button class="modalBtn"> + </button>
 
     </div>
 
@@ -70,7 +76,7 @@
 
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
-       
+
 
         var corpo = {
             titulo: form_postagem.titulo.value,
@@ -97,16 +103,19 @@
             } else {
                 throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
             }
+            window.location.reload()
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
             finalizarAguardar();
         });
 
+        
+
         return false;
 
     }
     function atualizarFeed() {
-       
+
 
         fetch("/avisos/listar").then(function (resposta) {
             if (resposta.ok) {
@@ -182,7 +191,32 @@
             }
         }).catch(function (resposta) {
             console.error(resposta);
-            finalizarAguardar
+       
         });
+
+        const switchModal = () => {
+            const modal = document.querySelector('.modal')
+            const actualStyle = modal.style.display
+            if (actualStyle == 'block') {
+                modal.style.display = 'none'
+            }
+            else {
+                modal.style.display = 'block'
+            }
+        }
+
+        const btn = document.querySelector('.modalBtn')
+        btn.addEventListener('click', switchModal)
+
+        window.onclick = function (event) {
+            console.log(event)
+            const modal = document.querySelector('.modal')
+            if (event.target == modal) {
+                switchModal()
+
+            }
+        }
     }
+
+   
 </script>

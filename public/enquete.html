@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styleEnquete.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="ContainerNavBar">
+        <div class="logo" id="logo">
+            <img src="./img/logo.png" alt="">
+        </div>
+        <div class="icone" id="inicio">
+            Início
+        </div>
+        <div class="icone" id="farms">
+            Farms
+        </div>
+        <div class="icone" id="classes">
+            Classes
+        </div>
+        <div class="icone" id="comuniadade">
+            Comunidade
+        </div>
+        <div class="sair" id="iconSair">
+            <a href="./login.html">Sair</a>
+        </div>
+    </div>
+
+
+    <h1>Votação</h1>
+
+    <div id="poll">
+        <h2>Qual o seu ato favorito?</h2>
+        <ul id="options">
+            <li>
+                <input type="radio" name="ato" id="option1" value="ato 1">
+                <label for="option1">Ato 1</label>
+            </li>
+            <li>
+                <input type="radio" name="ato" id="option2" value="ato 2">
+                <label for="option2">Ato 2</label>
+            </li>
+            <li>
+                <input type="radio" name="ato" id="option3" value="ato 3">
+                <label for="option3">Ato 3</label>
+            </li>
+            <li>
+                <input type="radio" name="ato" id="option4" value="ato 4">
+                <label for="option4">Ato 4</label>
+            </li>
+            <li>
+                <input type="radio" name="ato" id="option5" value="ato 5">
+                <label for="option5">Ato 5</label>
+            </li>
+        </ul>
+        <button onclick="voto()">Votar</button>
+        <div id="resultado"></div>
+    </div>
+<!-- 
+    <div class="containerGrafico">
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+    </div> -->
+</body>
+
+</html>
+
+<script>
+    function voto() {
+    const options = document.getElementsByName("ato");
+    let selectedOption = null;
+
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].checked) {
+            selectedOption = options[i].value;
+            break;
+        }
+    }
+
+    if (selectedOption) {
+        document.getElementById("resultado").textContent = `Você votou em: ${selectedOption}`;
+    } else {
+        document.getElementById("resultado").textContent = "Selecione uma opção antes de votar.";
+    }
+
+    
+}
+</script>

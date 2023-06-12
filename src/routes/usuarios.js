@@ -20,4 +20,13 @@ router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
 });
 
+router.get("/fotos", function (req, res) {
+    usuarioController.listarFotos(req, res);
+})
+
+router.patch("/adicionarFotos", function (req, res) {
+    console.log("To na rota usuarios/addFoto")
+    usuarioController.attFoto(req, res);
+})
+
 module.exports = router;
