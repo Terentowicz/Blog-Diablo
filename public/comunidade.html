@@ -67,7 +67,6 @@
         <button class="modalBtn"> + </button>
 
     </div>
-
 </body>
 
 </html>
@@ -137,27 +136,31 @@
 
                         // criando e manipulando elementos do HTML via JavaScript
                         var divPublicacao = document.createElement("div");
-                        var spanID = document.createElement("span");
+                        var imgPerfil = document.createElement("img")
                         var spanTitulo = document.createElement("span");
                         var spanNome = document.createElement("span");
                         var divDescricao = document.createElement("div");
                         var divButtons = document.createElement("div");
 
-
-                        spanID.innerHTML = "ID: <b>" + publicacao.idComentario + "</b>";
-                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nomeUsuario + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
+                        if(publicacao.url == null || publicacao.url == undefined){
+                            var fotoPadrão = "./img/sem-foto.png"
+                            imgPerfil.src = fotoPadrão
+                        }else {
+                            imgPerfil.src = publicacao.url
+                        }
+                        
+                        spanTitulo.innerHTML = "<b>Título: " + publicacao.titulo + "<br></b>";
+                        spanNome.innerHTML = "<br><b>" + publicacao.nomeUsuario + "</b><br>";
+                        divDescricao.innerHTML = "<b>" + publicacao.descricao + "</b>";
 
                         divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idComentario;
+                        imgPerfil.className = "publicacao-img"
                         spanNome.className = "publicacao-nome";
                         spanTitulo.className = "publicacao-titulo";
                         divDescricao.className = "publicacao-descricao";
-
                         divButtons.className = "div-buttons"
 
-                        divPublicacao.appendChild(spanID);
+                        divPublicacao.appendChild(imgPerfil);
                         divPublicacao.appendChild(spanNome);
                         divPublicacao.appendChild(spanTitulo);
                         divPublicacao.appendChild(divDescricao);
@@ -217,6 +220,7 @@
             }
         }
     }
+
 
    
 </script>

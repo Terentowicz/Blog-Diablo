@@ -80,6 +80,7 @@
                             let pathImgPerfilPadrao = "./img/fundoNecro.webp";
                             document.getElementById("imgPerfil").src = resposta[i].url == null ? `${pathImgPerfilPadrao}` : `${resposta[i].url}`;
                             // operador ternário ^^^^ -- condicao é verdadeira ? valor caso sim : valor caso não
+                            
                         }
                     }
                 });
@@ -156,7 +157,7 @@
     }
 
     function attFoto() {
-
+        
         fetch("/usuarios/adicionarFotos", {
             method: "PATCH",
             headers: {
@@ -170,9 +171,10 @@
             })
         }).then(function (resposta) {
             if (resposta.status == 400) {
+                alert("Selecione uma foto antes de salvar!")
                 console.log("Há um erro no body ou nos headers da sua requisição. Verifique e tente novamente.");
             }
         })
-
+        window.location.reload()
     }
 </script>

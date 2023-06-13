@@ -60,13 +60,13 @@
         </ul>
         <button onclick="voto()">Votar</button>
         <div id="resultado"></div>
-    </div>
-    <!-- 
-    <div class="containerGrafico">
-        <div>
-            <canvas id="myChart"></canvas>
+        <div class="containerGrafico">
+            <div>
+                <canvas id="myChartCanvas"></canvas>
+            </div>
         </div>
-    </div> -->
+    </div>
+
 </body>
 
 </html>
@@ -76,20 +76,20 @@
 
     function voto() {
         const options = document.getElementsByName("ato");
-        
+
 
         for (let i = 0; i < options.length; i++) {
             if (options[i].checked) {
                 var opcSelecionada = null;
                 opcSelecionada = options[i].value;
-               
+
                 console.log()
-                
+
                 break;
             }
         }
 
-        if (opcSelecionada) {
+        if (opcSelecionada != null || opcSelecionada != undefined) {
             document.getElementById("resultado").textContent = `Você votou em: Ato ${opcSelecionada}`;
             fetch("/usuarios/votarEnquete", {
                 method: "PATCH",
@@ -97,14 +97,100 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                   
-                 opcSelecionadaServer: opcSelecionada  
+
+                    opcSelecionadaServer: opcSelecionada
                 })
             })
+            alert("Você votou com sucesso!")
+            attGrafico()
         } else {
             document.getElementById("resultado").textContent = "Selecione uma opção antes de votar.";
         }
 
 
+    }
+
+    function attGrafico() {
+        console.log("to na função att grafico");
+        fetch("/usuarios/atualizarEnquete", { 
+            headers: {
+            'Cache-Control': 'no-store'
+        } }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (response) {
+                    console.log(`Dados recebidos: ${JSON.stringify(response)}`);
+                  
+                    console.log(JSON.stringify(response[1].contador_votos));
+
+                    plotarGrafico(response);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+
+    function plotarGrafico(response) {
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Ato',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(0,0,0)',
+                backgroundColor: 'rgb(178,34,34)',
+                tension: 0.1
+            },
+           ]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < response.length; i++) {
+            
+            labels.push(JSON.stringify(response[i].atos));
+            console.log('Esses são os dados dos votos puxados do banco: ' + response[i].contador_votos);
+
+            dados.datasets[0].data.push(response[i].contador_votos);
+
+            
+            
+           
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(`myChartCanvas`),
+            config
+        );
+
+        console.log('Se chegou aqui, tem que ter gráfico');
     }
 </script>

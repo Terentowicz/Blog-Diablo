@@ -48,10 +48,21 @@ function listarFotos(){
     return database.executar(`SELECT * FROM imgPerfil`);
 
 }
+
 function attFoto(idImg, idUsuario){
-    console.log("Tô no comando de atualizar do banco")
     var instrucao = `UPDATE usuario SET fkImg = ${idImg} WHERE id = ${idUsuario} `
     return database.executar(instrucao)
+}
+
+function addVoto (atoVotado){
+    console.log("To na models do voto");
+    var instrucao = `UPDATE enquete SET contador_votos = contador_votos + 1 WHERE id = ${atoVotado}`
+    return database.executar(instrucao)
+}
+
+function attGrafico (){
+    console.log("Estou na models do att grafico");
+    return database.executar(`SELECT * FROM enquete`)
 }
 
 module.exports = {
@@ -59,5 +70,7 @@ module.exports = {
     cadastrar,
     listar,
     listarFotos,
-    attFoto
+    attFoto,
+    addVoto,
+    attGrafico
 };

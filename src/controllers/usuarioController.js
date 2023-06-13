@@ -139,14 +139,44 @@ function attFoto(req, res) {
 }
 
 function addVoto (req, res) {
-    console.log();
+    console.log("To na controller do voto");
     var atoVotado = req.body.opcSelecionadaServer
 
     console.log("Esse aqui é o valor do ato selcionado:" + atoVotado);
 
     if (addVoto == null || addVoto == undefined){
         res.status(404).send("Meu parceiro, seu voto ta sem valor :(")
+    }else {
+        usuarioModel.addVoto(atoVotado)
+        .then(function (resultado) {
+        
+            res.status(204).send("Update realizado com sucesso.");
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar ao inseriri o voto da enquete! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
     }
+}
+
+function attGrafico (req, res){
+    console.log("Mano to na attGrafico, mas, na model!!!!!");
+    usuarioModel.attGrafico()
+    .then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
 }
 
 
@@ -157,5 +187,6 @@ module.exports = {
     testar,
     listarFotos,
     attFoto,
-    addVoto
+    addVoto,
+    attGrafico
 }

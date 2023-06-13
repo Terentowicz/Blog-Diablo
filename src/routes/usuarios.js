@@ -29,7 +29,11 @@ router.patch("/adicionarFotos", function (req, res) {
 })
 
 router.patch("/votarEnquete", function (req, res){
-    console.log("Tô na rota: votar enquete");
+    usuarioController.addVoto(req, res);
+})
+router.get("/atualizarEnquete", function (req, res){
+    console.log("To na rota do att grafico")
+    usuarioController.attGrafico(req, res);
 })
 
 module.exports = router;

@@ -4,18 +4,21 @@ function listar() {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
         SELECT 
-            c.id AS idComentario,
-            c.titulo,
-            c.descricao,
-            c.fkUsuario,
-            u.id AS idUsuario,
-            u.nomeUsuario,
-            u.email,
-            u.senha
-        FROM comentario AS c
-            INNER JOIN usuario AS u
-                ON c.fkUsuario = u.id
-        ORDER BY idComentario DESC;
+        c.id AS idComentario,
+        c.titulo,
+        c.descricao,
+        c.fkUsuario,
+        u.id AS idUsuario,
+        u.nomeUsuario,
+        u.email,
+        u.senha,
+        i.url
+    FROM comentario AS c
+        INNER JOIN usuario AS u
+            ON c.fkUsuario = u.id
+            left join  imgPerfil as i
+            on u.fkImg = i.id
+    ORDER BY idComentario DESC;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
