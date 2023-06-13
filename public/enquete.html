@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styleEnquete.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Document</title>
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+    <title>Enquete</title>
 </head>
 
 <body>
@@ -15,17 +16,15 @@
             <img src="./img/logo.png" alt="">
         </div>
         <div class="icone" id="inicio">
-            Início
+             <a href="./index.html">Início</a>
         </div>
-        <div class="icone" id="farms">
-            Farms
+        <div class="icone" id="comunidade">
+             <a href="./comunidade.html">Comunidade</a>
         </div>
-        <div class="icone" id="classes">
-            Classes
+        <div class="icone" id="perfil">
+             <a href="./perfilUsuario.html">Perfil</a>
         </div>
-        <div class="icone" id="comuniadade">
-            Comunidade
-        </div>
+       
         <div class="sair" id="iconSair">
             <a href="./login.html">Sair</a>
         </div>
@@ -65,6 +64,10 @@
                 <canvas id="myChartCanvas"></canvas>
             </div>
         </div>
+    </div>
+
+    <div class="kadalaMeme" onclick="droprarPrimevo()">
+        <img src="./img/Kadala_Portrait  (1).png" alt="" id="imgKadala">
     </div>
 
 </body>
@@ -192,5 +195,16 @@
         );
 
         console.log('Se chegou aqui, tem que ter gráfico');
+    }
+
+    function droprarPrimevo (){
+        var drop = null 
+
+        drop = parseInt( Math.random() * 900 + 1)
+
+        if (drop == 900){
+            alert("Parabéns, gastou toda a sua sorte na Kadala fake, dropou um primevo!")
+        }
+        console.log(drop);
     }
 </script>

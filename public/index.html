@@ -5,27 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Inicial</title>
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/styleIndex.css">
+    <title>Tela Inicial</title>
 </head>
 
-<body>
+<body id="corpo">
     <div class="ContainerNavBar">
         <div class="logo" id="logo">
-            <img src="../public/img/logo.png" alt="">
+            <img src="./img/logo.png" alt="">
         </div>
         <div class="icone" id="inicio">
             Início
         </div>
-        <div class="icone" id="farms">
-            Farms
-        </div>
-        <div class="icone" id="classes">
-            Classes
-        </div>
-        <div class="icone" id="comuniadade">
-            Comunidade
-        </div>
+
         <div class="login" id="iconLogin">
             <a href="./login.html">Login </a>
         </div>
@@ -33,7 +26,7 @@
 
     <div class="containerInfo">
 
-        <div id="infoDiablo4">
+        <div id="info">
             <h3>
                 Últimas notícias sobre Diablo IV
             </h3><br>
@@ -41,11 +34,11 @@
                 Como temos informação, no dia 06/06/2023 será oficialmente lançado o diablo 4, esperamos ansiosamente
                 para esse lançamento a anos. Repito senhores, isto não é uma simulação, mês que vem sai Diablo
                 4!!!!</span>
-                <br>
+            <br>
             <button onclick="saibaMais()">Saiba Mais</button>
         </div>
 
-        <div id="infoSite">
+        <div id="info">
             <h3>
                 Diablo 3 Vai acabar?
             </h3><br>
@@ -57,16 +50,57 @@
             <br>
             <button onclick="entrar()">Entrar</button>
         </div>
-    </div>
+        </div>
+        <div class="carrossel">
+            <ul class="lista_carrossel">
+                <li class="img-js ">
+                    <img class="ingame" src="./img/ft1.jpg">
+                </li>
+                <li class="img-js">
+                    <img class="ingame" src="./img/ft2.jpg">
+                </li>
+                <li class="img-js">
+                    <img class="ingame" src="./img/ft3.jpg">
+                </li>
+                <li class="img-js">
+                    <img class="ingame" src="./img/ft4.jpg">
+                </li>
+                <li class="img-js">
+                    <img class="ingame" src="./img/ft5.jpg">
+                </li>
+            </ul>
+        </div>
+
+
+
 </body>
 
 </html>
 <script>
+    var i = 0
+
     function saibaMais() {
         window.location.href = "https://diablo4.blizzard.com/pt-br/?gclid=CjwKCAjw1YCkBhAOEiwA5aN4AT7mrK-z5LAdvSVeUS5VlBN-f2suGMG1Xmdx_ocVGoBHpoBX_JlmTBoCz8UQAvD_BwE"
     }
 
-    function entrar(){
+    function entrar() {
         window.location = "./login.html"
     }
+    function ativarFuncao() {
+        var imgLi = document.querySelectorAll(".img-js")
+
+        for (var iImg = 0; iImg < imgLi.length; iImg++) {
+            imgLi[iImg].classList.remove('ativo')
+        }
+
+        imgLi[i].classList.toggle('ativo')
+        i++
+      
+        console.log();
+        if (i >= imgLi.length) {
+            i = 0
+        }
+    }
+    ativarFuncao()
+    setInterval(ativarFuncao, 5000)
 </script>

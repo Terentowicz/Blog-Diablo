@@ -37,17 +37,19 @@
      color:white;
      font-size: 3vh;
      margin-top:3vh;
-     margin-left: 100vh;
+     margin-left: 120vh;
      cursor: pointer;
- 
+     
  }
- .sair a{
+ .sair a {
+    text-decoration: none;
+     color: white;
+ }
+ .icone a{
     text-decoration: none;
     color: white;
  }
-.editar {
-    background-color: black;
-}
+
 .div-reuslts {
     display: flex;
     flex-direction: row;
@@ -89,9 +91,10 @@
     background-color: #242526;
     color: aliceblue;
     cursor: pointer;
-    margin-top: 72vh;
-    margin-left: 8vh;
+    top:550px;
+    left:30px;
     font-size: 20px;
+    position: fixed;
     
 }
 

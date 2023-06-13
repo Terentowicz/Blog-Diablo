@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styleComunidade.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+    <title>Comunidade</title>
 </head>
 
 <body onload="atualizarFeed()">
@@ -15,19 +16,17 @@
             <img src="./img/logo.png" alt="">
         </div>
         <div class="icone" id="inicio">
-            Início
+            <a href="./index.html">Início</a>
         </div>
-        <div class="icone" id="farms">
-            Farms
+        <div class="icone" id="enquete">
+            <a href="./enquete.html">Enquete</a>
         </div>
-        <div class="icone" id="classes">
-            <a href="./perfilUsuario.html">Classes</a>
+        <div class="icone" id="perfil">
+            <a href="./perfilUsuario.html">Perfil</a>
         </div>
-        <div class="icone" id="comuniadade">
-            Comunidade
-        </div>
-        <div class="sair" id="iconSair">
-            <a href="./login.html">Sair </a>
+       
+        <div class="sair" id="iconSair" onclick="">
+            <a href="./login.html">Sair</a>  
         </div>
     </div>
 
@@ -54,9 +53,9 @@
                         </label>
                         <br>
                         <label>
-                            Descrição (máximo de 250 caracteres):
+                            Descrição (máximo de 1024 caracteres):
                             <br>
-                            <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                            <textarea name="descricao" id="textarea_descricao" maxlength="1024" rows="5"></textarea>
                         </label>
                         <br>
                         <button type="submit">Enviar</button>
@@ -64,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <button class="modalBtn"> + </button>
+        <button class="modalBtn" id="botaoAdd"> + </button>
 
     </div>
 </body>
@@ -72,6 +71,10 @@
 </html>
 
 <script>
+    window.addEventListener('scrol', function(){
+        var elementoFixo = document.getElementById("botaoAdd");
+        elementoFixo.style.top = (50 + window.pageYOffset) + 'px'
+    })
 
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
@@ -108,7 +111,7 @@
             finalizarAguardar();
         });
 
-        
+
 
         return false;
 
@@ -142,13 +145,13 @@
                         var divDescricao = document.createElement("div");
                         var divButtons = document.createElement("div");
 
-                        if(publicacao.url == null || publicacao.url == undefined){
+                        if (publicacao.url == null || publicacao.url == undefined) {
                             var fotoPadrão = "./img/sem-foto.png"
                             imgPerfil.src = fotoPadrão
-                        }else {
+                        } else {
                             imgPerfil.src = publicacao.url
                         }
-                        
+
                         spanTitulo.innerHTML = "<b>Título: " + publicacao.titulo + "<br></b>";
                         spanNome.innerHTML = "<br><b>" + publicacao.nomeUsuario + "</b><br>";
                         divDescricao.innerHTML = "<b>" + publicacao.descricao + "</b>";
@@ -166,26 +169,6 @@
                         divPublicacao.appendChild(divDescricao);
                         divPublicacao.appendChild(divButtons);
                         feed.appendChild(divPublicacao);
-
-                        if (sessionStorage.ID_USUARIO == resposta[i].idUsuario) {
-                            var btnEditar = document.createElement("button");
-                            var btnDeletar = document.createElement("button");
-
-                            btnEditar.innerHTML = "Editar";
-                            btnDeletar.innerHTML = "Deletar";
-
-                            btnEditar.className = "editar"
-                            btnEditar.id = "btnEditar" + publicacao.idComentario;
-                            btnEditar.setAttribute("onclick", `editar(${publicacao.idComentario})`);
-
-                            btnDeletar.className = "publicacao-btn-editar"
-                            btnDeletar.id = "btnDeletar" + publicacao.idComentario;
-                            btnDeletar.setAttribute("onclick", `deletar(${publicacao.idComentario})`);
-
-                            divButtons.appendChild(btnEditar);
-                            divButtons.appendChild(btnDeletar);
-
-                        }
                     }
 
                 });
@@ -194,7 +177,7 @@
             }
         }).catch(function (resposta) {
             console.error(resposta);
-       
+
         });
 
         const switchModal = () => {
@@ -221,6 +204,7 @@
         }
     }
 
+    
 
-   
+
 </script>

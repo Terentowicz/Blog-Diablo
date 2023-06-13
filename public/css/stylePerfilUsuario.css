@@ -41,7 +41,7 @@
      cursor: pointer;
  
  }
- .sair a{
+ .icone a{
     text-decoration: none;
     color: white;
  }
@@ -54,6 +54,7 @@
     background-color: #242526;
     margin-top: 3vh;
     margin-left: 70vh;
+    opacity: 0.95;
     
     border-radius: 20px;
  }
@@ -134,15 +135,18 @@
     font-size: 3.5vh;
 }
 .fotosModal {
-    border-radius: 100%;
-    width: auto;
-    height: auto;
+    display: flex;
+   flex-wrap: wrap;
+    width: 30vh;
+    height: 30vh;
+    padding: 2vh;
 }
 .selecionada {
    background-color: #242526;
    opacity: 0.3;
 }
 
-.imgPerfil {
-    background: none;
+#imgPerfil {
+    width: 20vh;
+    height: 20vh;
 }

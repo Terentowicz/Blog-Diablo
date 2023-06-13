@@ -1,19 +1,22 @@
-
 * {
-   margin: 0;
-   padding: 0; 
+    margin: 0;
+    padding: 0;
 }
+
 body {
-    background-image: url(../img/fundo-inicial.jpg);
+    background-color: #1a1a1b;
 }
+
 @font-face {
     font-family: diabloTitulo;
     src: url(../fontes/diablo-heavy.ttf);
 }
+
 @font-face {
     font-family: diabloTexto;
     src: url(../fontes/diablo-light.ttf);
 }
+
 .ContainerNavBar {
     font-family: diabloTitulo;
     display: flex;
@@ -21,44 +24,49 @@ body {
     width: 100%;
     height: 10vh;
     background-color: #242526;
-    
 }
-#logo img{
+
+#logo img {
     height: 10vh;
 }
+
 .icone {
-    color:rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
     font-size: 3vh;
     margin-top: 3vh;
     margin-left: 1vh;
     padding-left: 5vh;
     cursor: pointer;
-} 
+}
+
 .login {
-    color:white;
+    color: white;
     font-size: 3vh;
-    margin-top:3vh;
-    margin-left: 100vh;
+    margin-top: 3vh;
+    margin-left: 170vh;
     cursor: pointer;
 
 }
-.login a{
+
+.login a {
     text-decoration: none;
     color: white;
 }
+
 .fotFundo img {
     height: 100%;
     width: 100%;
 }
+
 .containerInfo {
     display: flex;
     flex-direction: row;
-    /* justify-content: space-evenly; */
-    /* justify-content: space-between; */
-  
+    justify-content: space-between;
+
 
 }
-#infoDiablo4 {
+
+#info {
     font-family: diabloTexto;
     width: 60vh;
     height: 70vh;
@@ -66,25 +74,25 @@ body {
     margin-top: 5vh;
     border-radius: 12px;
     opacity: 0.7;
-    background-color:black;
+    background-color: black;
     color: aliceblue;
     font-size: 25px;
     padding: 1vh;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
+#infoDiablo4 span {
+    border: red;
+    border-style: dashed;
+}
 
-#infoSite {
-    font-family: diabloTexto;
-    width: 60vh;
-    height: 70vh;
-    margin-left: 72vh;
-    margin-top: 5vh;
-    border-radius: 12px;
-    opacity: 0.7;
-    background-color:black;
-    color:aliceblue;
-    font-size: 25px;
-    padding: 1vh;
+#infoDiablo4 button {
+    border: red;
+    border-style: dashed;
 }
 
 button {
@@ -95,22 +103,41 @@ button {
     background: cover;
     cursor: pointer;
     font-family: diabloTexto;
-     justify-content: center;
-    align-items: center;
-    margin-left: 20vh;
-    margin-top: 5vh;
+    text-align: center;
+    padding: 25 25 25 25;
 }
 
-button #SaibaMais2{
-    background-image: url(../img/fundinhobotao.png);
-    border: none;
-    width: 17vh;
-    height: 4vh;
-    background: cover;
-    cursor: pointer;
-    font-family: diabloTexto;
-     justify-content: center;
-    align-items: center;
-    margin-left: 28vh;
-    margin-top: 5vh;
+.lista_carrossel {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.img-js {
+    display: none;
+}
+
+.img-js img {
+    width: 100%;
+}
+
+.ativo {
+    display: block !important;
+    animation-name: opacity;
+    animation-duration: 3s;
+
+}
+
+@keyframes opacity {
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+.ingame {
+    width: 100%;
 }

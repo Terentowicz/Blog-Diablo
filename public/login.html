@@ -6,28 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styleLogin.css">
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+
     <title>Login</title>
 </head>
 
 <body>
     <div class="ContainerNavBar">
-        <div class="logo" id="logo">
-            <img src="../img/logo.png" alt="">
+        <div class="logo" id="icone">
+            <a href="index.html">
+                <img src="../img/logo.png" alt="">
+            </a>
         </div>
-        <div class="atalho" id="inicio">
-            Início
-        </div>
-        <div class="atalho" id="farms">
-            Farms
-        </div>
-        <div class="atalho" id="classes">
-            Classes
-        </div>
-        <div class="atalho" id="comunidade">
-            Comunidade
-        </div>
-        <div class="cadastro" id="cadastro">
-            Cadastro
+        
+        <div class="cadastro" id="icone">
+           <a href="./cadastro.html">Cadastro</a> 
         </div>
     </div>
 
@@ -48,7 +41,6 @@
             </div>
         </div>
     </div>
-    <!-- Aqui vai começar a parte do cadastro realmente -->
     
 </body>
 </html>
@@ -72,7 +64,7 @@
 
             if (resposta.ok) {
                 console.log(resposta);
-
+                alert("Logado com sucesso!")
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
@@ -81,10 +73,11 @@
                     sessionStorage.ID_USUARIO = json.id;
 
                     console.log(sessionStorage.NOME_USUARIO)
-
+                   
                     setTimeout(function () {
-                        window.location = "./comunidade.html";
-                    }, 1000); // apenas para exibir o loading
+                        
+                        window.location = "./perfilUsuario.html";
+                    }, 1000);
 
                 });
 

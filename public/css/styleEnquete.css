@@ -32,6 +32,8 @@
      margin-left: 1vh;
      padding-left: 5vh;
      cursor: pointer;
+     text-decoration: none;
+     
  } 
  .sair {
      color:white;
@@ -47,9 +49,11 @@
  }
 
  h1 {
+   margin-left: 92vh;
     font-family: diabloTexto;
     text-align: center;
     background-color: #f0f0f0;
+    width: 30vh ;
     
 }
 
@@ -84,4 +88,9 @@ button {
     font-weight: bold;
     font-family: diabloTexto;
  
+}
+#imgKadala {
+    margin-bottom: 120h;
+    width: 15vh;
+    height: 15vh;
 }

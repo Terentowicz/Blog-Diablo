@@ -6,28 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/stylePerfilUsuario.css">
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+
     <title>Document</title>
 </head>
 
 <body onload="carregarInfos()">
     <div class="ContainerNavBar">
         <div class="logo" id="logo">
-            <img src="./img/logo.png" alt="">
+            <a href="./index.html">
+                <img src="./img/logo.png" alt="">
+            </a>
         </div>
         <div class="icone" id="inicio">
-            Início
+            <a href="./index.html">Início</a>
         </div>
-        <div class="icone" id="farms">
-            Farms
-        </div>
-        <div class="icone" id="classes">
-            Classes
+        <div class="icone" id="Enquete">
+            <a href="./enquete.html">Enquete</a>
         </div>
         <div class="icone" id="comuniadade">
-            Comunidade
-        </div>
-        <div class="sair" id="iconSair">
-            <a href="./login.html">Sair</a>
+            <a href="./comunidade.html">Comunidade</a>
         </div>
     </div>
 
@@ -72,10 +70,10 @@
 
                     for (let i = 0; i < resposta.length; i++) {
                         if (sessionStorage.ID_USUARIO == resposta[i].id) {
-                            nomeNome.innerHTML = `Nome: ${resposta[i].nome}`;
-                            sobrenome.innerHTML = `Sobrenome: ${resposta[i].sobrenome}`;
-                            email.innerHTML = `Email: ${resposta[i].email}`;
-                            nickName.innerHTML = `Nome Usuário: ${resposta[i].nomeUsuario}`;
+                            nomeNome.innerHTML = `<b>Nome</b>: ${resposta[i].nome}`;
+                            sobrenome.innerHTML = `<b>Sobrenome</b>: ${resposta[i].sobrenome}`;
+                            email.innerHTML = `<b>Email</b>: ${resposta[i].email}`;
+                            nickName.innerHTML = `<b>Nome Usuário</b>: ${resposta[i].nomeUsuario}`;
 
                             let pathImgPerfilPadrao = "./img/fundoNecro.webp";
                             document.getElementById("imgPerfil").src = resposta[i].url == null ? `${pathImgPerfilPadrao}` : `${resposta[i].url}`;
